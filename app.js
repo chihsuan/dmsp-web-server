@@ -3,24 +3,28 @@ var CONFIG = require('config');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var mongoose= require('mongoose');
+var Promise= require('bluebird');
+Promise.promisifyAll(require("mongoose"));
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Pgb = require("pg-bluebird");
 //var hive = require('thrift-hive');
 var pgb = new Pgb();
 
-var routes = require('./routes/index');
+//mongodb
+global.mongo= mongoose.createConnection(CONFIG.mongo);
 
 var app = express();
-global.db='';
 
 pgb.connect(CONFIG.pg)
   .then(function(connection) {
-    global.db = connection;
+    global.pg = connection;
+  })
+  .catch(function(err) {
+    console.log('pg not connect');
   });
-
 //global.hive = hive.createClient(CONFIG.hive);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -33,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var routes = require('./routes/index');
 app.use('/', routes);
 
 // catch 404 and forward to error handler

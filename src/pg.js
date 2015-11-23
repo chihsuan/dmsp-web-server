@@ -3,10 +3,10 @@ var Config = require('config');
 var util = require('util');
 var tableName = "data";
 
-exports.insert = function (req, res, next) {
+exports.create = function (req, res, next) {
 
   var sql = util.format("INSERT INTO %s (data) VALUES ('%s')", tableName, req.params.data);
-  global.db.client.query(sql)
+  global.pg.client.query(sql)
     .then(function(result) {
       res.send(200);
     })
@@ -17,11 +17,11 @@ exports.insert = function (req, res, next) {
 
 };
 
-exports.select = function (req, res, next) {
+exports.count = function (req, res, next) {
 
   var sql = util.format("SELECT COUNT(*) FROM %s;", tableName);
 
-  global.db.client.query(sql)
+  global.pg.client.query(sql)
     .then(function(result) {
       var count = result.rows[0].count; 
       res.send(util.format("jsonpCallback(%s)", count));

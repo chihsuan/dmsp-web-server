@@ -9,6 +9,7 @@ var Controllers= function (filePath) {
 module.exports= {
   //port
   port: 3000,
+	mongo: 'mongodb://localhost/dmsp',
   pg: process.env.PG_PATH,
   hive: {
     version: '0.7.1-cdh3u2',

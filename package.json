@@ -14,6 +14,8 @@
     "jade": "~1.9.2",
     "morgan": "~1.5.1",
     "pg-bluebird": "1.0.8",
+    "mongoose": "^4.0.0",
+    "bluebird": "^2.9.34",
     "serve-favicon": "~2.2.0",
     "thrift-hive": "0.0.7"
   }
