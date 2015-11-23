@@ -7,9 +7,15 @@ var dataModel= require('./data');
 
 //create
 exports.create= function (req, res, next) {
+  var params = req.params ? req.params.data : req;
 
-	var data = new dataModel({ data: req.params.data});
+	var data = new dataModel({ data: params});
+
   data.save(function (err) {
+    if (!next) {
+      return res.end();
+    }
+
     if(err) return next(err);
     res.send(200);
   });
