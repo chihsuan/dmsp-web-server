@@ -19,8 +19,6 @@ module.exports= {
 
   //path
   rootPath: rootPath,
-  Controllers: Controllers,
-  Models: Models,
-  Views: Views
+  Controllers: Controllers
 };
 

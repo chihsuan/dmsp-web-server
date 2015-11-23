@@ -12,11 +12,11 @@ var pgb = new Pgb();
 var routes = require('./routes/index');
 
 var app = express();
-global.pg='';
+global.db='';
 
 pgb.connect(CONFIG.pg)
   .then(function(connection) {
-    global.pg = connection;
+    global.db = connection;
   });
 
 //global.hive = hive.createClient(CONFIG.hive);
