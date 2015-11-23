@@ -8,7 +8,6 @@ var dataModel= require('./data');
 //create
 exports.create= function (req, res, next) {
   var params = req.params ? req.params.data : req;
-
 	var data = new dataModel({ data: params});
 
   data.save(function (err) {
