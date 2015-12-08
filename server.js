@@ -4,11 +4,11 @@ var Promise= require('bluebird');
 Promise.promisifyAll(require("mongoose"));
 var http = require('http');
 //mongodb
-global.mongo= mongoose.createConnection(CONFIG.mongo);
-var mongo= require(CONFIG.Controllers('mongo'));
+// global.mongo= mongoose.createConnection(CONFIG.mongo);
+// var mongo= require(CONFIG.Controllers('mongo'));
 var Pgb = require("pg-bluebird");
 var pgb = new Pgb();
-CONFIG.pg = "postgres://chihsuan@localhost/dmsp";
+CONFIG.pg = "postgres://{username}:{passwd}@{ip:port}/{dbname}";
 pgb.connect(CONFIG.pg)
   .then(function(connection) {
     global.pg = connection;
@@ -28,6 +28,11 @@ http.createServer(function(req, res) {
   else if (arr.length === 4 && arr[3] == 'SelectCurrentData') {
     //mongo.count(req, res);
     pg.count(req, res);
+  }
+  else if (arr.length === 2 && arr[1] == 'testip'){
+    require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+      res.end(add);
+    });
   }
 }).listen(8080, function() {
   console.log('listening on 8080');
