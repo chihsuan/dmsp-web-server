@@ -3,7 +3,7 @@ var mongoose= require('mongoose');
 var Promise= require('bluebird');
 Promise.promisifyAll(require("mongoose"));
 var http = require('http');
-mongodb
+// mongodb
 global.mongo= mongoose.createConnection(CONFIG.mongo);
 var mongo= require(CONFIG.Controllers('mongo'));
 // var Pgb = require("pg-bluebird");
