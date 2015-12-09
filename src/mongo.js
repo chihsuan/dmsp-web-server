@@ -11,6 +11,10 @@ exports.create= function (req, res, next) {
 	var data = new dataModel({ data: params});
 
   data.save(function (err) {
+    if (err) {
+      console.log('Mongodb: Error', err);
+    }
+
     if (!next) {
       return res.end();
     }
