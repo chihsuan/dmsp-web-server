@@ -1,10 +1,14 @@
 var key = 'data';
-var count = 1;
 
 exports.set = function(req, res, next) {
-  return global.redis.setAsync(key, count).then(function() {
+  return global.redis.getAsync(key).then(function(result) {
+    var count = parseInt(result) + 1;
+    return global.redis.setAsync(key, count);
+  }).then(function() {
     console.log('update');
-    count += 1;
+    res.end();
+  }).catch(function(error) {
+    console.log(error);
     res.end();
   });
 };
