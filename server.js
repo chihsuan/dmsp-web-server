@@ -46,12 +46,13 @@ if (db.pg) {
 
 http.createServer(function(req, res) {
   var arr = req.url.split('/');
+
   if (arr.length === 5 && arr[3] == 'DataInsertion') {
     //mongo.create(arr[4], res);
     //pg.create(arr[4], res);
     redisStore.set(arr[4], res);
   }
-  else if (arr.length === 4 && arr[3] == 'SelectCurrentData') {
+  else if (arr.length === 4 && arr[3].indexOf('SelectCurrentData') >= 0) {
     //mongo.count(req, res);
     //pg.count(req, res);
     redisStore.get(arr[4], res);
