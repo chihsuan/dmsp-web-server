@@ -14,7 +14,7 @@ var db = {
 }
 
 if (db.redis) {
-  var redisClient = redis.createClient('6379', '52.23.166.231');
+  var redisClient = redis.createClient('6379', '52.91.1.120');
   redisClient.on("error", function (err) {
     console.log("Error " + err);
   });
