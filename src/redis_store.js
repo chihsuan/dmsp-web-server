@@ -1,10 +1,9 @@
 var key = 'data';
 
 exports.set = function(req, res, next) {
-  return global.redis.getAsync(key).then(function(result) {
-    var count = parseInt(result) + 1;
-    return global.redis.setAsync(key, count);
-  }).then(function() {
+
+  return global.redis.incrAsync(key)
+   .then(function(reply) {
     console.log('update');
     res.end();
   }).catch(function(error) {
